@@ -1,57 +1,51 @@
 # Unraid Deck Notification Agent
 
-A lightweight, native Unraid notification agent plugin designed explicitly for the **Unraid Deck iOS App**. This plugin bridges the gap between your Unraid server's built-in alert system and your iPhone, forwarding system notices, warnings, and alerts directly to your mobile device via secure Apple Push Notification service (APNs).
+This is a simple Unraid notification agent plugin for the **Unraid Deck iOS App**. It forwards Unraid system alerts and notices directly to your iPhone.
 
-Unlike generic messengers, this agent is purpose-built to send structured JSON payloads directly to Unraid Deck's Cloudflare-powered push gateway, ensuring zero external dependencies and prioritizing your privacy.
+The plugin converts Unraid events into a JSON payload and pushes it to your phone securely via a Cloudflare Worker, without saving any of your data on third-party servers.
 
-## ✨ Features
-- **Native Unraid Integration**: Integrates directly into Unraid's `Settings -> Notifications -> Agents` panel.
-- **Real-time Push**: Delivers push notifications instantly over Apple's APNs infrastructure.
-- **Privacy First**: Uses anonymized Device & Server Tokens. Message contents are securely forwarded through a stateless Cloudflare Worker, with nothing saved or tracked.
-- **Adaptive Importance**: Translates Unraid's severity levels (Normal, Warning, Alert) to the app.
+## Features
+- **Native Integration**: Works directly in Unraid's `Settings -> Notifications -> Agents`.
+- **Zero Dependencies**: Pure Bash script, no Python or other heavy dependencies required.
+- **Privacy First**: Direct pass-through of notifications; no data is logged or tracked by our servers.
 
 ---
 
-## 🚀 Installation
+## Installation
 
-Install the plugin directly inside your Unraid Web Interface:
-
-1. Open your Unraid Web UI and navigate to the **Plugins** tab.
-2. Click on the **Install Plugin** tab.
+1. Open your Unraid Web UI and go to the **Plugins** tab.
+2. Select the **Install Plugin** tab.
 3. Paste the following URL into the text field:
    ```text
    https://raw.githubusercontent.com/mccray-s/unraid-deck-agent/main/UnraidDeck.plg
    ```
-4. Click **Install**. The plugin will automatically download and set up the necessary scripts.
+4. Click **Install**.
 
 ---
 
-## ⚙️ Configuration
+## Configuration
 
-1. **Get your Webhook Token from the App**
+1. **Get your App Token**
    - Open the **Unraid Deck** app on your iPhone.
-   - Go to the Server Settings where you enabled Push Notifications.
-   - Find and copy your unique **10-character Webhook Token** (e.g., `0Wfj6ZXxf3`).
+   - Go to Server Settings where you enabled Push Notifications.
+   - Copy your **10-character App Token** (e.g., `0Wfj6ZXxf3`).
 
 2. **Setup the Unraid Agent**
-   - Head back to your Unraid Web UI.
-   - Go to **Settings** -> **Notification Settings**.
+   - In Unraid, go to **Settings** -> **Notification Settings**.
    - Scroll down to the **Agents** section and find **Unraid Deck**.
-   - Toggle the agent on to **Enable**.
-   - Paste your 10-character Webhook Token into the designated field.
-   - Click **Apply** at the bottom of the page.
+   - Toggle the switch to **Enable**.
+   - Paste your App Token into the field.
+   - Click **Apply**.
 
 3. **Test the Connection**
-   - While still on the Notification Settings page, click the **Test** button next to the Unraid Deck agent.
-   - You should receive a popup banner on your iPhone confirming the setup!
+   - Click the **Test** button next to the Unraid Deck agent to verify it works. You should receive a push notification on your iPhone.
 
 ---
 
-## 🛠 Troubleshooting
+## Troubleshooting
 If you aren't receiving test messages:
-- Ensure you have pressed "Apply" after entering your Webhook Token and enabling the agent.
-- Make sure Push Notifications are fully allowed inside iOS Settings for the Unraid Deck app.
-- Check the Unraid **System Log** via the window icon at the top right of your Unraid UI. Look for labels prefixed with `UnraidDeckAgent` to see HTTP response codes and potential errors.
+- Ensure you have clicked "Apply" after entering your App Token.
+- Make sure you have allowed Push Notifications for Unraid Deck in your iOS Settings.
 
-## 📄 License
+## License
 MIT License

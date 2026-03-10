@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Agent>
+  <Name>UnraidDeck</Name>
+  <Icon>/usr/local/emhttp/plugins/dynamix/icons/unraiddeck.png</Icon>
+  <Variables>
+    <Variable Help="Enter your App Token from the Unraid Deck iOS App Settings." Desc="App Token" Default="">DECK_TOKEN</Variable>
+    <Variable Help="Specify the fields which are included in the title." Desc="Notification Title" Default="$SUBJECT">DECK_TITLE</Variable>
+    <Variable Help="Specify the fields which are included in the message body." Desc="Notification Message" Default="$DESCRIPTION">DECK_MESSAGE</Variable>
+  </Variables>
+  <Script>
+    <![CDATA[
+#!/bin/bash
+# Shebang MUST be the absolute first line with NO leading spaces
+############
+{0}
+############
+
+# Ensure token is provided
+if [ -z "$DECK_TOKEN" ]; then
+  logger -t "UnraidDeck" "Error: DECK_TOKEN is not defined in Notification Settings."
+  exit 1
+fi
+
+# API Endpoint
+PUSHURL="https://unraid-push.mccray.app/webhook/$DECK_TOKEN"
+
+# Use printf to handle potential special characters in variables safely
+E_TITLE=$(printf '%b' "$DECK_TITLE")
+E_MESSAGE=$(printf '%b' "$DECK_MESSAGE")
+
+# Construct JSON payload matching the Cloudflare Worker webhook schema
+# Escaping logic for JSON safety (Zero dependencies, pure Bash)
+ESC_TITLE=$(echo -n "$E_TITLE" | sed 's/\\/\\\\/g; s/"/\\"/g; s/\n/\\n/g; s/\r/\\r/g; s/\t/\\t/g')
+ESC_MESSAGE=$(echo -n "$E_MESSAGE" | sed 's/\\/\\\\/g; s/"/\\"/g; s/\n/\\n/g; s/\r/\\r/g; s/\t/\\t/g')
+
+JSON_PAYLOAD=$(printf '{"event": "%s", "subject": "%s", "description": "%s", "importance": "%s"}' \
+  "$EVENT" "$ESC_TITLE" "$ESC_MESSAGE" "$IMPORTANCE")
+
+# Send push notification with 10s timeout, piping output to /dev/null
+curl -s -m 10 -X POST "$PUSHURL" \
+     -H "Content-Type: application/json; charset=utf-8" \
+     -d "$JSON_PAYLOAD" > /dev/null 2>&1
+    ]]>
+  </Script>
+</Agent>

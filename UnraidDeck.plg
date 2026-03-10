@@ -1,0 +1,83 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE PLUGIN [
+<!ENTITY name "UnraidDeck">
+<!ENTITY author "mccray">
+<!ENTITY version "2026.03.11">
+<!ENTITY launch "Settings/Notifications">
+<!ENTITY plugdir "/usr/local/emhttp/plugins/&name;">
+<!ENTITY github "mccray-s/unraid-deck-agent">
+<!ENTITY pluginURL "https://raw.githubusercontent.com/&github;/main/&name;.plg">
+]>
+
+<PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.11.0" support="https://forums.unraid.net/">
+
+<CHANGES>
+###2026.03.11
+- Initial Release: Core notification push logic for Unraid Deck iOS app.
+</CHANGES>
+
+<!--
+The 'pre-install' script.
+Cleans up any potential previous installation directories.
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+rm -rf /boot/config/plugins/&name;
+mkdir -p /boot/config/plugins/&name;
+echo "Installing Unraid Deck Notification Agent..."
+</INLINE>
+</FILE>
+
+<!--
+Download the Agent XML file directly from Github
+This replaces the old Base64 inline method.
+-->
+<FILE Name="/usr/local/emhttp/plugins/dynamix/agents/UnraidDeck.xml">
+<URL>https://raw.githubusercontent.com/&github;/main/plugins/dynamix/agents/UnraidDeck.xml</URL>
+</FILE>
+
+<!--
+Download the icon file from Github
+-->
+<FILE Name="/usr/local/emhttp/plugins/dynamix/icons/unraiddeck.png">
+<URL>https://raw.githubusercontent.com/&github;/main/plugins/dynamix/icons/unraiddeck.png</URL>
+</FILE>
+
+<!--
+The 'post-install' script.
+Ensures execution permissions and provides user feedback.
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+chmod +x /usr/local/emhttp/plugins/dynamix/agents/UnraidDeck.xml
+echo ""
+echo "----------------------------------------------------"
+echo " &name; Agent has been successfully installed."
+echo " Version: &version;"
+echo " Go to Settings -> Notifications -> Agents to configure."
+echo "----------------------------------------------------"
+echo ""
+</INLINE>
+</FILE>
+
+<!--
+The 'remove' script.
+Executed when the user uninstalls the plugin from the WebUI.
+-->
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+# Remove runtime files
+rm -rf /usr/local/emhttp/plugins/dynamix/agents/UnraidDeck.xml
+rm -rf /usr/local/emhttp/plugins/dynamix/icons/unraiddeck.png
+# Remove persistent config directory (even if currently empty, this is best practice)
+rm -rf /boot/config/plugins/&name;
+
+echo ""
+echo "----------------------------------------------------"
+echo " &name; Agent has been removed."
+echo "----------------------------------------------------"
+echo ""
+</INLINE>
+</FILE>
+
+</PLUGIN>
