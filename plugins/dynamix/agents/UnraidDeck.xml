@@ -24,6 +24,10 @@ fi
 # API Endpoint
 PUSHURL="https://unraid-push.mccray.app/webhook/$DECK_TOKEN"
 
+# System notification variables are injected via {0} above.
+# Ensure variables have safe defaults
+IMPORTANCE="${IMPORTANCE:-normal}"
+
 # Use printf to handle potential special characters in variables safely
 E_TITLE=$(printf '%b' "$DECK_TITLE")
 E_MESSAGE=$(printf '%b' "$DECK_MESSAGE")
