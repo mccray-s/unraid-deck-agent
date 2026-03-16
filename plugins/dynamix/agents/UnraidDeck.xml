@@ -28,13 +28,13 @@ PUSHURL="https://unraid-push.mccray.app/webhook/$DECK_TOKEN"
 E_TITLE=$(printf '%b' "$DECK_TITLE")
 E_MESSAGE=$(printf '%b' "$DECK_MESSAGE")
 
-# Construct JSON payload matching the Cloudflare Worker webhook schema
+# Construct JSON payload matching the WebhookPayload schema
 # Escaping logic for JSON safety (Zero dependencies, pure Bash)
 ESC_TITLE=$(echo -n "$E_TITLE" | sed 's/\\/\\\\/g; s/"/\\"/g; s/\n/\\n/g; s/\r/\\r/g; s/\t/\\t/g')
 ESC_MESSAGE=$(echo -n "$E_MESSAGE" | sed 's/\\/\\\\/g; s/"/\\"/g; s/\n/\\n/g; s/\r/\\r/g; s/\t/\\t/g')
 
-JSON_PAYLOAD=$(printf '{"event": "%s", "subject": "%s", "description": "%s", "importance": "%s"}' \
-  "$EVENT" "$ESC_TITLE" "$ESC_MESSAGE" "$IMPORTANCE")
+JSON_PAYLOAD=$(printf '{"subject": "%s", "description": "%s", "importance": "%s"}' \
+  "$ESC_TITLE" "$ESC_MESSAGE" "$IMPORTANCE")
 
 # Send push notification with 10s timeout, piping output to /dev/null
 curl -s -m 10 -X POST "$PUSHURL" \
