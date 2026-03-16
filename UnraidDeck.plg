@@ -1,6 +1,6 @@
 <?xml version="1.0" standalone="yes"?>
 <!DOCTYPE PLUGIN [
-<!ENTITY name "UnraidDeck">
+<!ENTITY name "Unraid Deck">
 <!ENTITY author "mccray">
 <!ENTITY version "2026.03.16">
 <!ENTITY launch "Settings/Notifications">
@@ -14,6 +14,7 @@
 <CHANGES>
 ###2026.03.16
 - Feature: Removed 'event' field and simplified to 'subject', 'description', and 'importance'.
+- Change: Changed from "UnraidDeck" to "Unraid Deck".
 
 ###2026.03.11
 - Initial Release: Core notification push logic for Unraid Deck iOS app.
