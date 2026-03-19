@@ -10,35 +10,34 @@
   <Script>
     <![CDATA[
 #!/bin/bash
-# Shebang MUST be the absolute first line with NO leading spaces
 ############
 {0}
 ############
 
 # Ensure token is provided
 if [ -z "$DECK_TOKEN" ]; then
-  logger -t "UnraidDeck" "Error: DECK_TOKEN is not defined in Notification Settings."
+  logger -t "UnraidDeck" "Error: DECK_TOKEN is not set. Configure it in Notification Settings."
   exit 1
 fi
 
 # API Endpoint
 PUSHURL="https://unraid-push.mccray.app/webhook/$DECK_TOKEN"
-
-# System notification variables are injected via {0} above.
 # Ensure variables have safe defaults
 IMPORTANCE="${IMPORTANCE:-normal}"
 
-# Use printf to handle potential special characters in variables safely
-E_TITLE=$(printf '%b' "$DECK_TITLE")
-E_MESSAGE=$(printf '%b' "$DECK_MESSAGE")
+# Sanitize values for safe JSON string embedding
+json_escape() {
+  local s="${1//\"/\\\"}"
+  printf '%s' "$s"
+}
 
-# Construct JSON payload matching the WebhookPayload schema
-# Escaping logic for JSON safety (Zero dependencies, pure Bash)
-ESC_TITLE=$(echo -n "$E_TITLE" | sed 's/\\/\\\\/g; s/"/\\"/g; s/\n/\\n/g; s/\r/\\r/g; s/\t/\\t/g')
-ESC_MESSAGE=$(echo -n "$E_MESSAGE" | sed 's/\\/\\\\/g; s/"/\\"/g; s/\n/\\n/g; s/\r/\\r/g; s/\t/\\t/g')
+ESC_TITLE=$(json_escape "$DECK_TITLE")
+ESC_MESSAGE=$(json_escape "$DECK_MESSAGE")
+ESC_TIMESTAMP=$(json_escape "$TIMESTAMP")
+ESC_LINK=$(json_escape "$LINK")
 
-JSON_PAYLOAD=$(printf '{"subject": "%s", "description": "%s", "importance": "%s"}' \
-  "$ESC_TITLE" "$ESC_MESSAGE" "$IMPORTANCE")
+JSON_PAYLOAD=$(printf '{"title":"%s","message":"%s","importance":"%s","timestamp":"%s","link":"%s"}' \
+  "$ESC_TITLE" "$ESC_MESSAGE" "$IMPORTANCE" "$ESC_TIMESTAMP" "$ESC_LINK")
 
 # Send push notification with 10s timeout, piping output to /dev/null
 curl -s -m 10 -X POST "$PUSHURL" \

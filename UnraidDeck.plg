@@ -12,6 +12,9 @@
 <PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.11.0" support="https://forums.unraid.net/">
 
 <CHANGES>
+###2026.03.20
+- Change: Update JSON payload.
+
 ###2026.03.16
 - Feature: Removed 'event' field and simplified to 'subject', 'description', and 'importance'.
 - Change: Changed from "UnraidDeck" to "Unraid Deck".
