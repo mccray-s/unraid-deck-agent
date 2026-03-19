@@ -2,7 +2,7 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name "Unraid Deck">
 <!ENTITY author "mccray">
-<!ENTITY version "2026.03.16">
+<!ENTITY version "2026.03.20">
 <!ENTITY launch "Settings/Notifications">
 <!ENTITY plugdir "/usr/local/emhttp/plugins/&name;">
 <!ENTITY github "mccray-s/unraid-deck-agent">
