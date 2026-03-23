@@ -25,6 +25,10 @@ The plugin converts Unraid events into a JSON payload and pushes it to your phon
 
 ## Configuration
 
+> 📖 **[Step-by-Step Setup Guide with Screenshots](https://unraid.mccray.app/blog/unraid-deck-push-notifications-setup-guide/)**
+
+Or follow the quick steps below:
+
 1. **Get your App Token**
    - Open the **Unraid Deck** app on your iPhone.
    - Go to Server Settings where you enabled Push Notifications.
