@@ -13,6 +13,9 @@ The plugin converts Unraid events into a JSON payload and pushes it to your phon
 
 ## Installation
 
+> If you installed this plugin before `2026.03.25`, please reinstall once from the URL below to fix update status stuck on `checking...`.  
+> Notification functionality is unchanged.
+
 1. Open your Unraid Web UI and go to the **Plugins** tab.
 2. Select the **Install Plugin** tab.
 3. Paste the following URL into the text field:
