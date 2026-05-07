@@ -2,16 +2,20 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name "UnraidDeck">
 <!ENTITY author "mccray">
-<!ENTITY version "2026.03.25">
+<!ENTITY version "2026.05.07">
 <!ENTITY launch "Settings/Notifications">
 <!ENTITY plugdir "/usr/local/emhttp/plugins/&name;">
 <!ENTITY github "mccray-s/unraid-deck-agent">
 <!ENTITY pluginURL "https://raw.githubusercontent.com/&github;/main/&name;.plg">
 ]>
 
-<PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.11.0" support="https://forums.unraid.net/">
+<PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.11.0" support="https://forums.unraid.net/topic/198651-plugin-unraid-deck-notification-agent/">
 
 <CHANGES>
+###2026.05.07
+- Change: Update support URL to the official Unraid forum plugin topic.
+- Change: Update plugin icon.
+
 ###2026.03.25
 - Fix: Restore plugin internal name to `UnraidDeck` to resolve plugin update status stuck on "checking".
 - Add: Add legacy compatibility entry file `Unraid Deck.plg` for older install URLs.
