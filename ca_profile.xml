@@ -1,0 +1,8 @@
+<CommunityApplications>
+  <Profile>
+    Unraid Deck maintains the Unraid Deck notification agent plugin for Unraid. The plugin forwards Unraid notification events to the Unraid Deck iOS app through the Unraid Deck push service.
+  </Profile>
+  <Icon>https://raw.githubusercontent.com/mccray-s/unraid-deck-agent/main/plugins/dynamix/icons/unraiddeck.png</Icon>
+  <WebPage>https://github.com/mccray-s/unraid-deck-agent</WebPage>
+  <Forum>https://forums.unraid.net/topic/198651-plugin-unraid-deck-notification-agent/</Forum>
+</CommunityApplications>

@@ -1,0 +1,12 @@
+<Plugin>
+  <Name>Unraid Deck</Name>
+  <Overview>Push Unraid notifications to the Unraid Deck iOS app.</Overview>
+  <PluginURL>https://raw.githubusercontent.com/mccray-s/unraid-deck-agent/main/UnraidDeck.plg</PluginURL>
+  <PluginAuthor>mccray</PluginAuthor>
+  <Support>https://forums.unraid.net/topic/198651-plugin-unraid-deck-notification-agent/</Support>
+  <Project>https://github.com/mccray-s/unraid-deck-agent</Project>
+  <ReadMe>https://raw.githubusercontent.com/mccray-s/unraid-deck-agent/main/README.md</ReadMe>
+  <Category>Tools:System</Category>
+  <Icon>https://raw.githubusercontent.com/mccray-s/unraid-deck-agent/main/plugins/dynamix/icons/unraiddeck.png</Icon>
+  <License>MIT</License>
+</Plugin>
