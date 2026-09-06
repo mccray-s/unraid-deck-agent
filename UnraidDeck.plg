@@ -49,6 +49,7 @@ This replaces the old Base64 inline method.
 -->
 <FILE Name="/usr/local/emhttp/plugins/dynamix/agents/UnraidDeck.xml">
 <URL>https://raw.githubusercontent.com/&github;/main/plugins/dynamix/agents/UnraidDeck.xml</URL>
+<SHA256>c769dad755f3d1744439eec2442d1fc9fcd25dae7d2fe02dbcc222702ee2bc7a</SHA256>
 </FILE>
 
 <!--
@@ -56,6 +57,7 @@ Download the icon file from Github
 -->
 <FILE Name="/usr/local/emhttp/plugins/dynamix/icons/unraiddeck.png">
 <URL>https://raw.githubusercontent.com/&github;/main/plugins/dynamix/icons/unraiddeck.png</URL>
+<SHA256>dd937da62b0e97f18a27cde2282e4119f4ab702efabd3846fd90a40379b4cefb</SHA256>
 </FILE>
 
 <!--
