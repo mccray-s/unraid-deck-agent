@@ -2,7 +2,7 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name "UnraidDeck">
 <!ENTITY author "mccray">
-<!ENTITY version "2026.05.07">
+<!ENTITY version "2026.10.10">
 <!ENTITY launch "Settings/Notifications">
 <!ENTITY plugdir "/usr/local/emhttp/plugins/&name;">
 <!ENTITY github "mccray-s/unraid-deck-agent">
@@ -12,6 +12,9 @@
 <PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.11.0" support="https://forums.unraid.net/topic/198651-plugin-unraid-deck-notification-agent/">
 
 <CHANGES>
+###2026.10.10
+- Security: Add SHA256 integrity checks for the downloaded notification agent and icon.
+
 ###2026.05.07
 - Change: Update support URL to the official Unraid forum plugin topic.
 - Change: Update plugin icon.
