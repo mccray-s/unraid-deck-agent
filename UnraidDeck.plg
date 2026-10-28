@@ -9,11 +9,12 @@
 <!ENTITY pluginURL "https://raw.githubusercontent.com/&github;/main/&name;.plg">
 ]>
 
-<PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.11.0" support="https://forums.unraid.net/topic/198651-plugin-unraid-deck-notification-agent/">
+<PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.11.0" support="https://forums.unraid.net/topic/198651-plugin-unraid-deck-notification-agent/" icon="unraiddeck.png">
 
 <CHANGES>
 ###2026.10.28
 - Change: Update plugin icon.
+- Fix: Display the plugin icon in the installed plugins list.
 
 ###2026.10.10
 - Security: Add SHA256 integrity checks for the downloaded notification agent and icon.
@@ -73,6 +74,9 @@ Ensures execution permissions and provides user feedback.
 <FILE Run="/bin/bash">
 <INLINE>
 chmod +x /usr/local/emhttp/plugins/dynamix/agents/UnraidDeck.xml
+# Reuse the verified notification agent PNG in the plugin list's icon directory.
+mkdir -p "&plugdir;/images" || exit 1
+cp /usr/local/emhttp/plugins/dynamix/icons/unraiddeck.png "&plugdir;/images/unraiddeck.png" || exit 1
 echo ""
 echo "----------------------------------------------------"
 echo " &name; Agent has been successfully installed."
@@ -92,6 +96,9 @@ Executed when the user uninstalls the plugin from the WebUI.
 # Remove runtime files
 rm -rf /usr/local/emhttp/plugins/dynamix/agents/UnraidDeck.xml
 rm -rf /usr/local/emhttp/plugins/dynamix/icons/unraiddeck.png
+# Remove only the plugin list icon and empty directories, preserving other files.
+rm -f "&plugdir;/images/unraiddeck.png"
+rmdir "&plugdir;/images" "&plugdir;" 2>/dev/null
 # Remove persistent config directory (even if currently empty, this is best practice)
 rm -rf /boot/config/plugins/&name;
 
